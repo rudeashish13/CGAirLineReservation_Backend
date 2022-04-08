@@ -21,13 +21,13 @@ namespace AirLineReservationServices.Controllers
         private AirLineDbContext d = new AirLineDbContext();
 
         [HttpPost]
-        [Route("FlightID/LaunceDate/Origin/Destination/DepartureTime/ArrivalTime/NumberOfSeats/Fare")]
-        public List<Flight> AddFlights(string FlightID, DateTime LaunchDate, string Origin, string Destination,
-            string DeptTime, string ArrivalTime, int NoOfSeats, float Fare)
+        [Route("AddFlight")]
+        public string AddFlights(Flight flight)
         {
             
 
-            return f.AddFlight(FlightID, LaunchDate, Origin, Destination, DeptTime, ArrivalTime, NoOfSeats, Fare);
+            return f.AddFlight(flight.FlightID, flight.LaunchDate, flight.Origin, flight.Destination,
+                flight.DeptTime, flight.ArrivalTime, flight.NoOfSeats, flight.Fare);
             
         }
 

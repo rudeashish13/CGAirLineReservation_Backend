@@ -33,7 +33,7 @@ namespace AirLineReservationServices
             services.AddControllers();
 
             services.AddScoped<IUserRepo, UserRepo>();
-
+            services.AddScoped<IReservationRepo, ReservationRepo>();
             services.AddScoped<IFlightRepo, FlightRepo>();
 
             services.AddSwaggerGen(c =>

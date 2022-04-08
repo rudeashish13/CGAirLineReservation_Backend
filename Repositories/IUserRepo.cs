@@ -8,6 +8,6 @@ namespace AirLineReservationServices.Repositories
 {
     public interface IUserRepo
     {
-        public string Login(string Username, string Password);
+        string LoginCheck(string Username, string Password);
     }
 }

@@ -13,14 +13,32 @@ namespace AirLineReservationServices.Repositories
         private readonly AirLineDbContext d =  new AirLineDbContext();
 
 
-        public List<Flight> AddFlight(string FlightID, DateTime LaunchDate, string Origin, string Destination, string DeptTime, string ArrivalTime, int NoOfSeats, float Fare)
+        public string AddFlight(string FlightID, DateTime LaunchDate, string Origin, string Destination, string DeptTime, string ArrivalTime, int NoOfSeats, float Fare)
         {
-            Flight flight = new Flight(FlightID, LaunchDate, Origin, Destination, DeptTime, ArrivalTime, NoOfSeats, Fare);
+            //check if the FlightID already exists
+            var results = d.Flights.Where(x => x.FlightID == FlightID).ToList();
+            if (results.Count > 0)
+            {
+                return "Flight Already exists";
+            }
+            else
+            {
+                Flight flight = new Flight();
 
-            d.Flights.Add(flight);
-            d.SaveChanges();
+                flight.FlightID = FlightID;
+                flight.LaunchDate = DateTime.Today;
+                flight.Origin = Origin;
+                flight.Destination = Destination;
+                flight.DeptTime = DeptTime;
+                flight.ArrivalTime = ArrivalTime;
+                flight.NoOfSeats = NoOfSeats;
+                flight.Fare = Fare;
 
-            return d.Flights.ToList();
+                d.Flights.Add(flight);
+                d.SaveChanges();
+
+                return "Flight Added Succcesfully";
+            }
         }
 
 
@@ -35,10 +53,12 @@ namespace AirLineReservationServices.Repositories
             return d.Flights.ToList();
         }
 
-        public List<Flight> ViewFlight()
+        public List<Flight> ViewFlight(string Source,String Destination)
         {
-            var res = d.Flights.ToList();
-            return res;
+            if (Source != null && Destination != null)
+                return d.Flights.Where(x => x.Origin == Source && x.Destination == Destination).ToList();
+            else
+                return d.Flights.ToList();
         }
 
   

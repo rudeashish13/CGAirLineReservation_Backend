@@ -10,9 +10,9 @@ namespace AirLineReservationServices.Repositories
 {
     public interface IFlightRepo
     {
-        List<Flight> AddFlight(string FlightID, DateTime LaunchDate, string Origin, string Destination,
+        string AddFlight(string FlightID, DateTime LaunchDate, string Origin, string Destination,
             string DeptTime, string ArrivalTime, int NoOfSeats, float Fare);
         List<Flight> RemoveFlight(string FlightID);
-        List<Flight> ViewFlight();
+        List<Flight> ViewFlight(string Source,string Destination);
     }
 }

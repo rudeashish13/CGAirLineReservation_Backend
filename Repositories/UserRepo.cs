@@ -8,17 +8,14 @@ namespace AirLineReservationServices.Repositories
 {
     public class UserRepo: IUserRepo
     {
-        //public AirLineDbContext d = new AirLineDbContext();
-
-        //public UserRepo(AirLineDbContext d)
-        //{
-        //    this.d = d;
-        //}
-
-        public string Login(string Username, string Password)
+        private readonly AirLineDbContext d = new AirLineDbContext();
+        public string LoginCheck(string Username, string Password)
         {
-            throw new NotImplementedException();
+            var res = d.Users.Where(x => x.Username == Username && x.Password == Password).ToList();
+            if (res != null && res.Count == 1)
+                return "Logged In";
+            else
+                return "LogIn Failed";
         }
-        
     }
 }

@@ -21,9 +21,9 @@ namespace AirLineReservationServices.Controllers
 
         [HttpGet]
         [Route("TicketNo")]
-        public Reservation ViewTicketStatus(int TicketNo)
+        public Reservation ViewTicketStatus(string PassengerName)
         {
-            return r.ViewTicketStatus(TicketNo);
+            return r.ViewTickets(PassengerName);
         }
     }
 }

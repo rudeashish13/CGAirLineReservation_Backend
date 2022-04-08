@@ -10,7 +10,7 @@ namespace AirLineReservationServices.Repositories
     {
         AirLineDbContext d = new AirLineDbContext();
 
-        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, int ContactNo, string Email, int NoOftickets)
+        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, long ContactNo, string Email, int NoOftickets)
         {
             var BookingsMade = d.Reservations.Where(x => x.FlightID == FlightID && x.JourneyDate == JourneyDate && x.Status == "Booked").Select(x => x.NoOfTickets).Sum();
             var NoOfSeats = d.Flights.Where(x => x.FlightID == FlightID).Select(x => x.NoOfSeats).ToList()[0];
@@ -33,6 +33,7 @@ namespace AirLineReservationServices.Repositories
                 d.Reservations.Add(reservation);
                 d.SaveChanges();
 
+
                 return "BookingSucccesful";
             }
         }
@@ -48,9 +49,40 @@ namespace AirLineReservationServices.Repositories
             return d.Reservations.Where(x => x.TicketNo == TicketNo).SingleOrDefault();
         }
 
-        public Reservation ViewTicketStatus(int TicketNo)
+        public float GenerateRevenue(string FlightID)
         {
-            return d.Reservations.Where(x => x.TicketNo == TicketNo)
+            var TotalRevenue = d.Reservations.Where(x => x.FlightID == FlightID 
+            && x.Status == "Booked").Sum(s => s.TotalFare);
+
+            return TotalRevenue;
+                
+           
+        }
+
+        public float GenerateRevenue(string FlightID, DateTime RevenueStartDate,DateTime RevenueEndDate)
+        {
+            var t = d.Reservations.Where(x => x.FlightID == FlightID && x.Status == "Booked" && (x.JourneyDate >= RevenueStartDate && x.JourneyDate <= RevenueEndDate)).Sum(s => s.TotalFare);
+            return t;
+        }
+
+        public float TotalRevenueOfAirLine()
+        {
+            var t = d.Reservations.Where(x => x.Status == "Booked").Sum(s => s.TotalFare);
+
+            return t;
+                
+        }
+
+        public float TotalRevenueOfAirLine(DateTime RevenueStartDate, DateTime RevenueEndDate)
+        {
+            var t = d.Reservations.Where(x => x.Status == "Booked" && (x.JourneyDate >= RevenueStartDate && x.JourneyDate <= RevenueEndDate)).Sum(s => s.TotalFare);
+
+            return t;
+        }
+
+        public Reservation ViewTickets(String PassengerName)
+        {
+            return d.Reservations.Where(x => x.PassengerName == PassengerName)
                                     .SingleOrDefault();
         }
     }

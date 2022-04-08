@@ -20,8 +20,8 @@ namespace AirLineReservationServices.Controllers
         }
         private AirLineDbContext d = new AirLineDbContext();
 
-        [HttpPut]
-        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, int ContactNo, string Email, int NoOftickets)
+        [HttpPost]
+        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, long ContactNo, string Email, int NoOftickets)
         {
             return r.BookTicket(FlightID, JourneyDate, PassengerName, ContactNo, Email, NoOftickets);
         }

@@ -10,21 +10,7 @@ namespace AirLineReservationServices.Entities
     [Table("Flights")]
     public class Flight
     {
-        private string flightID;
-
-        public Flight(string flightID, DateTime launchDate, string origin, string destination, string deptTime, string arrivalTime, int noOfSeats, float fare)
-        {
-            FlightID = flightID;
-            LaunchDate = launchDate;
-            Origin = origin;
-            Destination = destination;
-            DeptTime = deptTime;
-            ArrivalTime = arrivalTime;
-            NoOfSeats = noOfSeats;
-            Fare = fare;
-        }
-
-
+        
 
         //FlightId
         [Key]

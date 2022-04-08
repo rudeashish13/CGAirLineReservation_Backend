@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirLineReservationServices.Entities;
+using AirLineReservationServices.Repositories;
 
 namespace AirLineReservationServices.Controllers
 {
@@ -13,16 +14,19 @@ namespace AirLineReservationServices.Controllers
     public class UserLogin : ControllerBase
     {
 
-        private AirLineDbContext d = new AirLineDbContext();
-        [HttpGet]
-        [Route("Username/Password")]
-        public IActionResult Login(string Username,string Password)
+        private readonly IUserRepo u;
+
+        public UserLogin(IUserRepo u)
         {
-            var res = d.Users.Where(x => x.Username == Username && x.Password == Password).ToList();
-            if (res != null & res.Count > 0)
-                return Ok("Logged In");
-            else
-                return Ok("Login Unsuccesfull");
+            this.u = u;
+        }
+
+
+        [HttpGet]
+        [Route ("Login")]
+        public string Login(string Username,string Password)
+        {
+            return u.LoginCheck(Username, Password);
         }
 
 

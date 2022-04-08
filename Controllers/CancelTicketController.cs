@@ -21,7 +21,7 @@ namespace AirLineReservationServices.Controllers
         private AirLineDbContext d = new AirLineDbContext();
 
         [HttpPut]
-        [Route("TicketNo")]
+        [Route("{TicketNo}")]
         public Reservation CancelTicket(int TicketNo)
         {
             return r.CancelTicket(TicketNo);

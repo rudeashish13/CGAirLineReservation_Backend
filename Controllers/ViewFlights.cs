@@ -21,10 +21,10 @@ namespace AirLineReservationServices.Controllers
             this.f = f;
         }
 
-        [HttpGet("ViewFlights")]
-        public List<Flight> GetFlights()
+        [HttpGet]//("ViewFlights")]
+        public List<Flight> GetFlights(string Origin,string Destination)
         {
-            return f.ViewFlight();
+            return f.ViewFlight(Origin,Destination);
         }
 
         
