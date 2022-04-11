@@ -10,7 +10,8 @@ namespace AirLineReservationServices.Repositories
     {
         string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, long ContactNo, string Email, int NoOftickets);
         Reservation CancelTicket(int TicketNo);
-        Reservation ViewTickets(String PassengerName);
+        List<Reservation> ViewTickets(String PassengerName);
+        
         float GenerateRevenue(string FlightID);
         float TotalRevenueOfAirLine();
         float GenerateRevenue(string FlightID, DateTime RevenueStartDate,DateTime RevenueEndDate);

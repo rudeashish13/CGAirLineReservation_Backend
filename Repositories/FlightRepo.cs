@@ -12,7 +12,7 @@ namespace AirLineReservationServices.Repositories
     {
         private readonly AirLineDbContext d =  new AirLineDbContext();
 
-
+        //Adding a Flight to the database
         public string AddFlight(string FlightID, DateTime LaunchDate, string Origin, string Destination, string DeptTime, string ArrivalTime, int NoOfSeats, float Fare)
         {
             //check if the FlightID already exists
@@ -42,7 +42,7 @@ namespace AirLineReservationServices.Repositories
         }
 
 
-
+        // Removing flights from the database
         public List<Flight> RemoveFlight(string FlightID)
         {
             var flight = d.Flights.Where(x => x.FlightID == FlightID).SingleOrDefault();
@@ -53,6 +53,7 @@ namespace AirLineReservationServices.Repositories
             return d.Flights.ToList();
         }
 
+        //View Flights by adding SOurce and Destination
         public List<Flight> ViewFlight(string Source,String Destination)
         {
             if (Source != null && Destination != null)

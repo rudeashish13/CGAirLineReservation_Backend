@@ -16,6 +16,7 @@ namespace AirLineReservationServices.Entities
         [Key]
         [StringLength(10)]
         [Column(TypeName = "Varchar")]
+        //To set IDENTITY_INSERT OFF, as FligtID is primary key
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string FlightID { get; set; }
 
@@ -30,7 +31,6 @@ namespace AirLineReservationServices.Entities
 
 
         //destination airport
-        
         [StringLength(10)]
         [Column(TypeName = "Varchar")]
         public string Destination { get; set; }
@@ -40,16 +40,18 @@ namespace AirLineReservationServices.Entities
         [StringLength(10)]
         [Column(TypeName = "Varchar")]
         public string DeptTime { get; set; }
+        
 
         //arrival time of flight at destination
         [StringLength(10)]
         [Column(TypeName = "Varchar")]
         public string ArrivalTime { get; set; }
 
+
         //no of seats passenger wants to book
-        
         [Column(TypeName = "int")]
         public int NoOfSeats { get; set; }
+
 
         //cost of a trip
         [Column(TypeName = "decimal")]

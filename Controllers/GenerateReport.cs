@@ -14,7 +14,7 @@ namespace AirLineReservationServices.Controllers
     public class GenerateReport : ControllerBase
     {
         private readonly IReservationRepo r;
-
+        AirLineDbContext d = new AirLineDbContext();
         public GenerateReport(IReservationRepo r)
         {
             this.r = r;
@@ -48,5 +48,8 @@ namespace AirLineReservationServices.Controllers
             return r.TotalRevenueOfAirLine(RevenueStartDate,RevenueEndDate);
 
         }
+
+        
+        
     }
 }

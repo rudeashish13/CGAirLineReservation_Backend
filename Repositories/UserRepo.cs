@@ -9,6 +9,9 @@ namespace AirLineReservationServices.Repositories
     public class UserRepo: IUserRepo
     {
         private readonly AirLineDbContext d = new AirLineDbContext();
+
+        //Checks if the admin is verified.
+        //matching the provied id password with the existing database
         public string LoginCheck(string Username, string Password)
         {
             var res = d.Users.Where(x => x.Username == Username && x.Password == Password).ToList();
