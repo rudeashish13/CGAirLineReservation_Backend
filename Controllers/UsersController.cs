@@ -11,19 +11,24 @@ namespace AirLineReservationServices.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TicketStatusController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly IReservationRepo r;
-        public TicketStatusController(IReservationRepo r)
+        private readonly IUserRepo u;
+
+        public UsersController(IUserRepo u)
         {
-            this.r = r;
+            this.u = u;
         }
 
+
         [HttpGet]
-        [Route("PassengerName")]
-        public List<Reservation> ViewTicketStatus(string PassengerName)
+        [Route("AdminLogin")]
+        public string Login(string Username, string Password)
         {
-            return r.ViewTickets(PassengerName);
+            return u.LoginCheck(Username, Password);
         }
+
+
+
     }
 }
