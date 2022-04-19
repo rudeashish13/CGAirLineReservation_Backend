@@ -14,5 +14,8 @@ namespace AirLineReservationServices.Repositories
             string DeptTime, string ArrivalTime, int NoOfSeats, float Fare);
         List<Flight> RemoveFlight(string FlightID);
         List<Flight> ViewFlight(string Source,string Destination);
+        Flight ViewFlight(string FlightID);
+
+        
     }
 }

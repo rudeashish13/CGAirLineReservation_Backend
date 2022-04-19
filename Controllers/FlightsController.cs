@@ -18,7 +18,7 @@ namespace AirLineReservationServices.Controllers
         {
             this.f = f;
         }
-        private AirLineDbContext d = new AirLineDbContext();
+        //private AirLineDbContext d = new AirLineDbContext();
 
         [HttpPost]
         [Route("AddFlight")]
@@ -47,6 +47,51 @@ namespace AirLineReservationServices.Controllers
         {
             return f.RemoveFlight(FlightID);
         }
+
+
+
+        [HttpGet]
+        [Route("ViewFlightById")]
+        public Flight ViewFlightByID(string FlightID)
+        {
+            return f.ViewFlight(FlightID);
+
+        }
+        
+        [HttpPost]
+        [Route("EditFlightDetails")]
+        public string UpdateFlights(string FlightID,Flight flight)
+        {
+
+            using (var d = new AirLineDbContext())
+            {
+
+
+                // Access particular record from a database
+                var data = d.Flights.FirstOrDefault(x => x.FlightID == FlightID);
+
+                //if any such record exist update
+                if (data != null)
+                {
+                    data.LaunchDate = flight.LaunchDate;
+                    data.Origin = flight.Origin;
+                    data.Destination = flight.Destination;
+                    data.DeptTime = flight.DeptTime;
+                    data.ArrivalTime = flight.ArrivalTime;
+                    data.Fare = flight.Fare;
+                    data.NoOfSeats = flight.NoOfSeats;
+                    d.SaveChanges();
+
+
+                    return "FLight Updated";
+                }
+                else
+                    return "Flight DOesn't Exist";
+            }
+        }
+
+
+
 
     }
 }

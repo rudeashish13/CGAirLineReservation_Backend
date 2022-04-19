@@ -41,6 +41,8 @@ namespace AirLineReservationServices.Repositories
             }
         }
 
+        
+
 
         // Removing flights from the database
         public List<Flight> RemoveFlight(string FlightID)
@@ -62,6 +64,12 @@ namespace AirLineReservationServices.Repositories
                 return d.Flights.ToList();
         }
 
-  
+        public Flight ViewFlight(string FlightID)
+        {
+            
+            return d.Flights.Where(x => x.FlightID == FlightID).SingleOrDefault();
+        }
+
+        
     }
 }
